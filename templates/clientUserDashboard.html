@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Uploaded Files</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .file-list {
+            margin-top: 20px;
+        }
+        .file-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .file-item:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .btn-download {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+        }
+        .btn-download:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Uploaded Files</h2>
+        
+        {% if files %}
+            <div class="file-list">
+                <ul class="list-group">
+                    {% for file in files %}
+                        <li class="file-item list-group-item d-flex justify-content-between align-items-center">
+                            {{file.user.username}}
+                            {{ file.doc.name }} <!-- Display file name -->
+                            <a href="{{ file.doc.url }}" download class="btn btn-download">Download</a> <!-- Download link -->
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% else %}
+            <p class="text-center">There are no uploaded files yet.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+ 
+{% endblock content %}
